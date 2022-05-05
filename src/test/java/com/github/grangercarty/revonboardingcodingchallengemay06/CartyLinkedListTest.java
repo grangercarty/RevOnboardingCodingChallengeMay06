@@ -37,11 +37,13 @@ public class CartyLinkedListTest {
 
         Assertions.assertTrue(list1.intersects(list3));
         Assertions.assertTrue(list3.intersects(list1));
+        Assertions.assertEquals(node, list1.intersectFinder(list3));
 
         Assertions.assertFalse(list1.intersects(list2));
         Assertions.assertFalse(list3.intersects(list2));
         Assertions.assertFalse(list2.intersects(list1));
         Assertions.assertFalse(list2.intersects(list3));
+        Assertions.assertNull(list1.intersectFinder(list2));
     }
 
     @Test
@@ -60,5 +62,8 @@ public class CartyLinkedListTest {
 
         Assertions.assertTrue(list1.loopDetector());
         Assertions.assertFalse(list2.loopDetector());
+
+        Assertions.assertEquals(current, list1.loopFinder());
+        Assertions.assertNull(list2.loopFinder());
     }
 }

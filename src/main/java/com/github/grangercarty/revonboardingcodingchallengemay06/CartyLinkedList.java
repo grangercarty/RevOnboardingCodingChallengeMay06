@@ -53,6 +53,27 @@ public class CartyLinkedList {
         return intersectFound;
     }
 
+    public CartyNode intersectFinder(CartyLinkedList testList) {
+        boolean intersectFound = false;
+        CartyNode current = head;
+        CartyNode testNode = testList.head;
+        while (!intersectFound && current.hasNext) {
+            testNode = testList.head;
+            while (testNode.hasNext) {
+                intersectFound = (intersectFound || (testNode == current));
+                testNode = testNode.getNext();
+            }
+            if (!intersectFound) {
+                current = current.getNext();
+            }
+        }
+        intersectFound = (intersectFound || (testNode == current));
+        if (!intersectFound) {
+            return null;
+        }
+        else {return current;}
+    }
+
     public boolean loopDetector() {
         boolean loopFound = false;
         ArrayList<CartyNode> nodeList = new ArrayList<>();
@@ -63,5 +84,22 @@ public class CartyLinkedList {
             current = current.getNext();
         }
         return loopFound;
+    }
+
+    public CartyNode loopFinder() {
+        boolean loopFound = false;
+        ArrayList<CartyNode> nodeList = new ArrayList<>();
+        CartyNode current = head;
+        while (current.hasNext && !loopFound) {
+            loopFound = (nodeList.contains(current));
+            nodeList.add(current);
+            if (!loopFound) {
+                current = current.getNext();
+            }
+        }
+        if (!loopFound) {
+            return null;
+        }
+        else {return current;}
     }
 }
